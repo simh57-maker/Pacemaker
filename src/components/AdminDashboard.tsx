@@ -213,34 +213,6 @@ export default function AdminDashboard({ initialData }: Props) {
           <ProjectChart data={data.projects} />
         </div>
 
-        <div style={{ marginTop: 1, background: '#262626', padding: '24px' }}>
-          <p style={{ fontSize: 12, color: '#8d8d8d', letterSpacing: '0.32px', textTransform: 'uppercase', marginBottom: 4 }}>Raw Data</p>
-          <p style={{ fontSize: 20, fontWeight: 400, color: '#f4f4f4', marginBottom: 24 }}>전체 기록 ({data.records.length}건)</p>
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
-              <thead>
-                <tr style={{ borderBottom: '1px solid #525252' }}>
-                  {['일시', '프로젝트', '제작자', '신규', '베리', '합계'].map(h => (
-                    <th key={h} style={{ textAlign: 'left', padding: '8px 16px', color: '#8d8d8d', fontWeight: 400, fontSize: 12, letterSpacing: '0.32px', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {data.records.map((r, i) => (
-                  <tr key={i} style={{ borderBottom: '1px solid #393939' }}>
-                    <td style={{ padding: '10px 16px', color: '#8d8d8d', fontFamily: "'IBM Plex Mono', monospace", fontSize: 12 }}>{r.일시.replace('T', ' ').slice(0, 16)}</td>
-                    <td style={{ padding: '10px 16px', color: '#c6c6c6' }}>{r.프로젝트}</td>
-                    <td style={{ padding: '10px 16px', color: '#f4f4f4' }}>{r.제작자}</td>
-                    <td style={{ padding: '10px 16px', color: '#4589ff', textAlign: 'right', fontFamily: "'IBM Plex Mono', monospace" }}>{r.신규.toLocaleString()}</td>
-                    <td style={{ padding: '10px 16px', color: '#08bdba', textAlign: 'right', fontFamily: "'IBM Plex Mono', monospace" }}>{r.베리.toLocaleString()}</td>
-                    <td style={{ padding: '10px 16px', color: '#f4f4f4', textAlign: 'right', fontWeight: 600, fontFamily: "'IBM Plex Mono', monospace" }}>{(r.신규 + r.베리).toLocaleString()}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
         <footer style={{ marginTop: 32, paddingTop: 16, borderTop: '1px solid #393939', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span style={{ fontSize: 11, color: '#525252' }}>Pacemaker Admin · IBM Carbon Design System</span>
           <span style={{ fontSize: 11, color: '#525252', fontFamily: "'IBM Plex Mono', monospace" }}>{data.records.length} records</span>
