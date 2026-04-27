@@ -73,18 +73,34 @@ export default function ProjectChart({ data, showBreakdown = true }: Props) {
         </PieChart>
       </ResponsiveContainer>
 
+      {/* Simple project stats — no creator detail */}
+      <div style={{ marginTop: 24, borderTop: '1px solid #393939', paddingTop: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto auto', gap: '4px 16px', marginBottom: 8 }}>
+          <span style={{ fontSize: 11, color: '#525252', textTransform: 'uppercase', letterSpacing: '0.32px' }}>프로젝트</span>
+          <span style={{ fontSize: 11, color: '#525252', textTransform: 'uppercase', textAlign: 'right' }}>신규</span>
+          <span style={{ fontSize: 11, color: '#525252', textTransform: 'uppercase', textAlign: 'right' }}>베리</span>
+          <span style={{ fontSize: 11, color: '#525252', textTransform: 'uppercase', textAlign: 'right' }}>합계</span>
+          <span style={{ fontSize: 11, color: '#525252', textTransform: 'uppercase', textAlign: 'right' }}>비중</span>
+        </div>
+        {data.map((p, i) => (
+          <div key={p.name} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto auto', gap: '4px 16px', padding: '10px 0', borderTop: '1px solid #393939', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ width: 10, height: 10, background: COLORS[i % COLORS.length], flexShrink: 0 }} />
+              <span style={{ color: '#f4f4f4', fontSize: 13 }}>{p.name}</span>
+            </div>
+            <span style={{ color: '#4589ff', fontSize: 13, textAlign: 'right', fontFamily: "'IBM Plex Mono', monospace" }}>{p.신규.toLocaleString()}</span>
+            <span style={{ color: '#08bdba', fontSize: 13, textAlign: 'right', fontFamily: "'IBM Plex Mono', monospace" }}>{p.베리.toLocaleString()}</span>
+            <span style={{ color: '#f4f4f4', fontSize: 13, textAlign: 'right', fontFamily: "'IBM Plex Mono', monospace" }}>{p.total.toLocaleString()}</span>
+            <span style={{ color: '#f1c21b', fontSize: 13, textAlign: 'right', fontFamily: "'IBM Plex Mono', monospace" }}>{p.share}%</span>
+          </div>
+        ))}
+      </div>
+
       {showBreakdown && <div style={{ marginTop: 24, borderTop: '1px solid #393939', paddingTop: 16 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           {data.map((p, i) => (
             <div key={p.name} style={{ borderBottom: '1px solid #393939' }}>
-              {/* Project header */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr auto auto auto auto',
-                gap: '8px 16px',
-                padding: '10px 0',
-                alignItems: 'center',
-              }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto auto', gap: '8px 16px', padding: '10px 0', alignItems: 'center' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{ width: 10, height: 10, background: COLORS[i % COLORS.length], flexShrink: 0 }} />
                   <span style={{ color: '#f4f4f4', fontSize: 13, fontWeight: 600 }}>{p.name}</span>
@@ -94,16 +110,8 @@ export default function ProjectChart({ data, showBreakdown = true }: Props) {
                 <span style={{ color: '#f4f4f4', fontSize: 13, textAlign: 'right', fontFamily: "'IBM Plex Mono', monospace" }}>{p.total.toLocaleString()}</span>
                 <span style={{ color: '#f1c21b', fontSize: 13, textAlign: 'right', fontFamily: "'IBM Plex Mono', monospace" }}>{p.share}%</span>
               </div>
-              {/* Creator sub-rows */}
               {Object.entries(p.creators).map(([creator, stats]) => (
-                <div key={creator} style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr auto auto auto auto',
-                  gap: '4px 16px',
-                  padding: '6px 0 6px 18px',
-                  alignItems: 'center',
-                  background: '#1e1e1e',
-                }}>
+                <div key={creator} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto auto', gap: '4px 16px', padding: '6px 0 6px 18px', alignItems: 'center', background: '#1e1e1e' }}>
                   <span style={{ color: '#8d8d8d', fontSize: 12 }}>└ {creator}</span>
                   <span style={{ color: '#4589ff', fontSize: 12, textAlign: 'right', fontFamily: "'IBM Plex Mono', monospace" }}>{stats.신규.toLocaleString()}</span>
                   <span style={{ color: '#08bdba', fontSize: 12, textAlign: 'right', fontFamily: "'IBM Plex Mono', monospace" }}>{stats.베리.toLocaleString()}</span>
