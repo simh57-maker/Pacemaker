@@ -5,6 +5,7 @@ import { ProjectData } from '@/lib/types'
 
 interface Props {
   data: ProjectData[]
+  showBreakdown?: boolean
 }
 
 const COLORS = ['#4589ff', '#08bdba', '#be95ff', '#ff7eb6', '#ff832b', '#f1c21b', '#42be65', '#fa4d56']
@@ -38,7 +39,7 @@ const renderCustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, share }
   )
 }
 
-export default function ProjectChart({ data }: Props) {
+export default function ProjectChart({ data, showBreakdown = true }: Props) {
   return (
     <div style={{ background: '#262626', padding: '24px' }}>
       <p style={{ fontSize: 12, color: '#8d8d8d', letterSpacing: '0.32px', textTransform: 'uppercase', marginBottom: 4 }}>
@@ -72,8 +73,7 @@ export default function ProjectChart({ data }: Props) {
         </PieChart>
       </ResponsiveContainer>
 
-      {/* Project breakdown table */}
-      <div style={{ marginTop: 24, borderTop: '1px solid #393939', paddingTop: 16 }}>
+      {showBreakdown && <div style={{ marginTop: 24, borderTop: '1px solid #393939', paddingTop: 16 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           {data.map((p, i) => (
             <div key={p.name} style={{ borderBottom: '1px solid #393939' }}>
@@ -116,7 +116,7 @@ export default function ProjectChart({ data }: Props) {
             </div>
           ))}
         </div>
-      </div>
+      </div>}
     </div>
   )
 }

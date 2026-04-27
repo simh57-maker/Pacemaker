@@ -146,7 +146,7 @@ export default function Dashboard({ initialData }: Props) {
         </div>
 
         <div style={{ marginTop: 1 }}>
-          <ProjectChart data={data.projects} />
+          <ProjectChart data={data.projects} showBreakdown={false} />
         </div>
 
         <footer style={{ marginTop: 32, paddingTop: 16, borderTop: '1px solid #393939', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
